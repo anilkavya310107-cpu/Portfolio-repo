@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AquaCalc Pro - Rooftop Rainwater Harvesting Assessment Tool</title>
+    <style>
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(rgba(0, 150, 200, 0.7), rgba(0, 150, 200, 0.8)), url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1470&q=80') no-repeat center center fixed;
+            background-size: cover;
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 2rem auto 4rem auto;
+            background: rgba(255 255 255 / 0.95);
+            color: #222;
+            border-radius: 10px;
+            padding: 2rem 3rem;
+            box-shadow: 0 0 25px rgba(0, 0, 0, 0.3);
+        }
+
+        h1,
+        h2 {
+            text-align: center;
+            font-weight: 900;
+            margin-bottom: 0.2rem;
+        }
+
+        h2 {
+            margin-top: 0.2rem;
+            color: #0077cc;
+        }
+
+        p.subtitle {
+            text-align: center;
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            color: #444;
+        }
+
+        .features {
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .feature {
+            flex: 1 1 30%;
+            background: rgba(255 255 255 / 0.85);
+            border-radius: 8px;
+            padding: 1rem 1.5rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            color: #000;
+        }
+
+        .feature h3 {
+            margin-bottom: 0.4rem;
+            font-weight: 700;
+        }
+
+        .feature p {
+            font-size: 0.9rem;
+        }
+
+        button.primary {
+            background-color: #0077cc;
+            color: white;
+            border: none;
+            padding: 0.6rem 1.4rem;
+            font-weight: 700;
+            font-size: 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            display: block;
+            margin: 1rem auto 3rem auto;
+            transition: background-color 0.3s ease;
+        }
+
+        button.primary:hover {
+            background-color: #005fa3;
+        }
+
+        form {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 2rem;
+            border-radius: 10px;
+            color: #222;
+        }
+
+        form section {
+            margin-bottom: 2rem;
+        }
+
+        form section h3 {
+            color: #0077cc;
+            margin-bottom: 0.5rem;
+            border-bottom: 2px solid #0077cc;
+            padding-bottom: 0.3rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.3rem;
+            font-weight: 600;
+        }
+
+        input[type=text],
+        input[type=number],
+        select {
+            width: 100%;
+            padding: 0.5rem;
+            margin-bottom: 1rem;
+            border-radius: 5px;
+            border: 1.5px solid #bbb;
+            font-size: 1rem;
+            box-sizing: border-box;
+        }
+
+        input[readonly] {
+            background: #eee;
+        }
+
+        .gps-row {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .gps-row input {
+            flex: 1;
+        }
+
+        .gps-row button {
+            flex-shrink: 0;
+            padding: 0.5rem 0.8rem;
+            background-color: #0077cc;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .gps-row button:hover {
+            background-color: #005fa3;
+        }
+
+        button#calculate {
+            background-color: #009944;
+            color: white;
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            margin: 0 auto;
+            display: block;
+            transition: background-color 0.3s ease;
+        }
+
+        button#calculate:hover {
+            background-color: #007a32;
+        }
+
+        #result {
+            max-width: 800px;
+            margin: 2rem auto;
+            background: #e6f4ea;
+            border: 2px solid #009944;
+            color: #06592c;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        @media(max-width: 720px) {
+            .features {
+                flex-direction: column;
+            }
+
+            .feature {
+                flex-basis: 100%;
+            }
+
+            .gps-row {
+                flex-direction: column;
+            }
+
+            .gps-row button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container" id="landing">
+        <h1><span style="color:#0077cc;">💧</span> AquaCalc Pro</h1>
+        <h2>Rooftop Rainwater Harvesting Assessment Tool</h2>
+        <p class="subtitle">
+            Professional on-spot assessment of rainwater harvesting potential and artificial recharge systems.<br />
+            Calculate, design, and optimize your water conservation solutions.
+        </p>
+        <button class="primary" id="startAssessmentBtn">Start Assessment</button>
+        <div class="features">
+            <div class="feature">
+                <h3>On-Spot Assessment</h3>
+                <p>Real-time field calculations using GPS and local environmental data</p>
+            </div>
+            <div class="feature">
+                <h3>Accurate Calculations</h3>
+                <p>Scientific methods for RTRWH potential and artificial recharge sizing</p>
+            </div>
+            <div class="feature">
+                <h3>Impact Analysis</h3>
+                <p>Comprehensive reports on water savings and environmental benefits</p>
+            </div>
+        </div>
+    </div>
+
+    <form id="assessmentForm" style="display:none;">
+        <h2>Site Assessment</h2>
+        <p style="text-align:center; color:#555;">Complete the form below for accurate RTRWH and artificial recharge
+            calculations</p>
+
+        <section>
+            <h3>📍 Site Information</h3>
+            <small>Location details and geographical coordinates</small>
+            <label for="location">Location/Address *</label>
+            <input type="text" id="location" name="location" placeholder="Enter site location" required />
+            <label>GPS Coordinates</label>
+            <div class="gps-row">
+                <input type="text" id="latitude" name="latitude" placeholder="Latitude e.g., 28.6139"
+                    pattern="^-?\d+(\.\d+)?$" title="Enter a valid latitude" />
+                <input type="text" id="longitude" name="longitude" placeholder="Longitude e.g., 77.2090"
+                    pattern="^-?\d+(\.\d+)?$" title="Enter a valid longitude" />
+                <button type="button" id="getLocationBtn">Get Current Location</button>
+            </div>
+        </section>
+
+        <section>
+            <h3>🏠 Rooftop Details</h3>
+            <small>Physical characteristics of the rooftop area</small>
+            <label for="rooftopArea">Rooftop Area (m²) *</label>
+            <input type="number" id="rooftopArea" name="rooftopArea" min="0" step="0.1" placeholder="e.g., 200"
+                required />
+
+            <label for="rooftopMaterial">Rooftop Material *</label>
+            <select id="rooftopMaterial" name="rooftopMaterial" required>
+                <option value="" disabled selected>Select material</option>
+                <option value="concrete">Concrete</option>
+                <option value="metal">Metal</option>
+                <option value="tiles">Tiles</option>
+                <option value="asphalt">Asphalt</option>
+                <option value="others">Others</option>
+            </select>
+
+            <label for="rooftopSlope">Rooftop Slope (degrees)</label>
+            <input type="number" id="rooftopSlope" name="rooftopSlope" min="0" max="90" step="1"
+                placeholder="e.g., 15" />
+
+            <label for="drainageCoeff">Drainage Coefficient</label>
+            <input type="number" id="drainageCoeff" name="drainageCoeff" min="0" max="1" step="0.01"
+                placeholder="e.g., 0.8" />
+        </section>
+
+        <section>
+            <h3>🌧️ Rainfall Data</h3>
+            <small>Local precipitation patterns and intensity</small>
+            <label for="annualRainfall">Annual Rainfall (mm) *</label>
+            <input type="number" id="annualRainfall" name="annualRainfall" min="0" step="0.1" placeholder="e.g., 1200"
+                required />
+
+            <label for="rainyDays">Rainy Days/Year</label>
+            <input type="number" id="rainyDays" name="rainyDays" min="0" max="365" step="1" placeholder="e.g., 80" />
+
+            <label for="intensityFactor">Intensity Factor</label>
+            <input type="number" id="intensityFactor" name="intensityFactor" min="0" max="1" step="0.01"
+                placeholder="e.g., 0.9" />
+        </section>
+
+        <section>
+            <h3>🌍 Soil & Geology</h3>
+            <small>Ground conditions for artificial recharge assessment</small>
+            <label for="soilType">Soil Type *</label>
+            <select id="soilType" name="soilType" required>
+                <option value="" disabled selected>Select soil type</option>
+                <option value="sand">Sand</option>
+                <option value="clay">Clay</option>
+                <option value="loam">Loam</option>
+                <option value="silt">Silt</option>
+                <option value="gravel">Gravel</option>
+            </select>
+
+            <label for="permeability">Permeability (m/day)</label>
+            <input type="number" id="permeability" name="permeability" min="0" step="0.01" placeholder="e.g., 2.5" />
+
+            <label for="groundwaterDepth">Groundwater Depth (m)</label>
+            <input type="number" id="groundwaterDepth" name="groundwaterDepth" min="0" step="0.1"
+                placeholder="e.g., 15" />
+        </section>
+
+        <section>
+            <h3>🏡 System Requirements</h3>
+            <small>Household needs and storage preferences</small>
+            <label for="householdSize">Household Size *</label>
+            <input type="number" id="householdSize" name="householdSize" min="1" step="1" placeholder="e.g., 4"
+                required />
+
+            <label for="dailyWaterDemand">Daily Water Demand (L)</label>
+            <input type="number" id="dailyWaterDemand" name="dailyWaterDemand" min="0" step="1"
+                placeholder="e.g., 500" />
+
+            <label for="storageType">Storage Type</label>
+            <select id="storageType" name="storageType">
+                <option value="" disabled selected>Select storage</option>
+                <option value="plastic">Plastic Tank</option>
+                <option value="concrete">Concrete Tank</option>
+                <option value="underground">Underground Cistern</option>
+                <option value="others">Others</option>
+            </select>
+        </section>
+
+        <button type="button" id="calculate">Calculate RTRWH Potential</button>
+    </form>
+
+    <div id="result" style="display:none;"></div>
+
+    <script>
+        const startBtn = document.getElementById('startAssessmentBtn');
+        const landing = document.getElementById('landing');
+        const form = document.getElementById('assessmentForm');
+        const resultDiv = document.getElementById('result');
+
+        startBtn.addEventListener('click', () => {
+            landing.style.display = 'none';
+            form.style.display = 'block';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        const getLocationBtn = document.getElementById('getLocationBtn');
+        const latInput = document.getElementById('latitude');
+        const lonInput = document.getElementById('longitude');
+
+        getLocationBtn.addEventListener('click', () => {
+            if (!navigator.geolocation) {
+                alert('Geolocation is not supported by your browser');
+                return;
+            }
+            getLocationBtn.textContent = 'Locating...';
+            navigator.geolocation.getCurrentPosition(
+                position => {
+                    latInput.value = position.coords.latitude.toFixed(6);
+                    lonInput.value = position.coords.longitude.toFixed(6);
+                    getLocationBtn.textContent = 'Get Current Location';
+                },
+                () => {
+                    alert('Unable to retrieve your location');
+                    getLocationBtn.textContent = 'Get Current Location';
+                }
+            );
+        });
+    </script>
+</body>
+
+</html>

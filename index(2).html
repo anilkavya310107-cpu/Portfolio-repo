@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Portfolio</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+<style>
+
+body{
+margin:0;
+font-family:Arial, sans-serif;
+background:linear-gradient(180deg,#0f2027,#203a43,#2c5364);
+color:#333;
+}
+
+
+.navZone123{
+display:flex;
+justify-content:space-between;
+align-items:center;
+background-color:#125673;
+padding:15px 30px;
+color:white;
+}
+
+.navTitleX{
+font-size:24px;
+font-weight:bold;
+
+}
+
+.navLinksX{
+display:flex;
+gap:20px;
+}
+
+.navLinksX a{
+color:white;
+text-decoration:none;
+font-weight:500;
+transition:color 0.3s;
+}
+
+.navLinksX a:hover{
+color:#ff6b6b;
+text-decoration:underline;
+}
+
+
+section{
+background-color:white;
+margin:40px auto;
+padding:30px;
+border-radius:15px;
+max-width:800px;
+box-shadow:0 8px 20px rgba(0,0,0,0.1);
+}
+
+
+h1{text-align:center;font-size:32px;margin-bottom:20px;color:#125673;}
+h1 span{color:#ff6b6b;}
+
+h2{
+color:#125673;
+margin-bottom:15px;
+font-size:24px;
+border-left:5px solid #125673;
+padding-left:10px;
+}
+
+ul{margin-left:20px;font-size:16px;list-style-type:square;}
+p{line-height:1.6;margin-bottom:15px;}
+
+
+.aboutContainerX{
+position:relative;
+display:flex;
+align-items:center;
+justify-content:flex-start;
+}
+
+.abtTextX{width:100%;z-index:2;}
+
+
+.picWrap123{
+position:fixed;
+top:200px;
+right:40px;
+z-index:10;
+}
+
+.picWrap123 img{
+width:279px;height:481px;
+border-radius:50%/38%;
+border:4px solid gold;
+box-shadow:0 4px 8px rgba(0,0,0,0.3);
+object-fit:contain;
+background-color:white;
+animation:float 3s ease-in-out infinite;
+transition:transform 0.3s ease;
+padding:5px;
+
+}
+
+.picWrap123 img:hover{transform:scale(1.05);}
+
+
+.cardX, .sihX, .cardf{
+background-color:#fdfdfd;
+padding:20px;
+border-radius:12px;
+box-shadow:0 6px 15px rgba(0,0,0,0.1);
+margin-bottom:20px;
+transition:transform 0.3s, box-shadow 0.3s;
+}
+
+.cardX:hover, .sihX:hover, .cardf:hover{
+transform:scale(1.03);
+box-shadow:0 8px 20px rgba(0,0,0,0.2);
+}
+
+
+a{color:#125673;text-decoration:none;font-weight:600;transition:color 0.3s;}
+a:hover{color:#ff6b6b;text-decoration:underline;}
+
+
+.contactIconsX{display:flex;gap:20px;margin-top:20px;justify-content:center;}
+.contactIconsX a{
+background-color:#1a1a1a;
+color:white;
+font-size:26px;
+width:60px;
+height:60px;
+display:flex;
+justify-content:center;
+align-items:center;
+border-radius:50%;
+transition:all 0.3s;
+}
+.contactIconsX a:hover{background-color:#ff6b6b;color:white;transform:scale(1.2);}
+
+
+@media(max-width:900px){.picWrap123{position:static;display:flex;justify-content:center;margin-top:20px;}}
+
+
+.backBtnX{text-align:center;margin:30px 0;}
+.backBtnX a{
+padding:10px 25px;
+background-color:#125673;
+color:white;
+text-decoration:none;
+border-radius:50px;
+transition:background-color 0.3s;
+}
+.backBtnX a:hover{background-color:#ff6b6b;}
+</style>
+</head>
+<body>
+
+<header class="navZone123">
+<div class="navTitleX">My Portfolio</div>
+<nav class="navLinksX">
+<a href="#home">Home</a>
+<a href="#about">About</a>
+<a href="#skills">Skills</a>
+<a href="#projects">Projects</a>
+<a href="#contact">Contacts</a>
+</nav>
+</header>
+
+<section id="home">
+<h1>Hi there! I'm <span>Kavya Sharma</span></h1>
+<p>CS student from Delhi, tinkering with code, breaking stuff, fixing stuff, learning stuff — repeat. Sleep is optional.</p>
+
+</section>
+
+<section id="about">
+<h2>About Me</h2>
+<div class="aboutContainerX">
+<div class="abtTextX">
+<p>Studying CSE at Scaler. Mostly DSA, web dev, and random small projects. Learning slowly, breaking sometimes, figuring life out one line at a time.</p>
+</div>
+</div>
+</section>
+
+<div class="picWrap123">
+<img src="./kavya.jpg" alt="Kavya Sharma">
+</div>
+
+<section id="skills">
+<h2>Skills</h2>
+<ul>
+<li>Java & JavaScript — mostly fluent</li>
+<li>HTML & CSS — comfort zone</li>
+<li>DSA — still learning, sometimes losing</li>
+</ul>
+</section>
+
+<section id="projects">
+<h2>Projects</h2>
+<div class="cardX">
+<h3>Personal Portfolio</h3>
+<p>You are literally looking at it. Built with plain HTML & CSS, late nights, caffeine included.</p>
+<a href="anilkavya310107-cpu/portfolio" target="_blank">View on GitHub</a>
+</div>
+<div class ="cardf">
+  <h3>Calculator</h3>
+
+  <p> A normal calculator made by html ,tears, sorrow and css</p>
+  <a href="./calcalutor.html" target="_blank">View on GitHub</a>
+</div>
+<div class="sihX">
+<h3>Rain Water Harvesting System</h3>
+<p>Part of our SIH team of six. I handle frontend. AI tool calculates recharge & storage capacity. coool.</p>
+<a href="./project.html" target="_blank">View on GitHub</a>
+</div>
+</section>
+
+<section id="contact">
+<h2>Contact</h2>
+<div class="contactIconsX">
+<a href="mailto:kavyasharma310107@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a>
+<a href="https://www.linkedin.com/in/kavya-sharma-5880a037a/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+<a href="https://github.com/anilkavya310107-cpu" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+<a href="tel:+919205254047" target="_blank" title="Phone"><i class="fas fa-phone"></i></a>
+</div>
+</section>
+
+<div class="backBtnX">
+<a href="index.html">Back to First Page</a>
+</div>
+
+<span style="display:none;">random note</span>
+
+</body>
+</html>
+
+
+
